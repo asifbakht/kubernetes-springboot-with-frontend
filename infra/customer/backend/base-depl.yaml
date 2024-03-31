@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: customer-backend-app
-        image: asifbakht/customer-backend-springboot:latest
+        image: asifbakht/customer-backend:latest
         resources:
           limits:
             cpu: 0.5
@@ -141,14 +141,14 @@ spec:
           httpGet:
             path: /api/v1/customer/actuator/health/liveness
             port: 9997
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           failureThreshold: 3
           periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /api/v1/customer/actuator/health/readiness
             port: 9997
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           periodSeconds: 10
           failureThreshold: 3
       automountServiceAccountToken: false
