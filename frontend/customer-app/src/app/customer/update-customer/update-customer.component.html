@@ -1,0 +1,70 @@
+<div class="center-half">
+  <mat-card>
+    <mat-card-title class="form-title">
+      <button mat-icon-button class="back-button" (click)="navigateBack()">
+        <mat-icon>arrow_circle_left</mat-icon>
+      </button>
+      <span class="form-title-text"> Customer Information </span>
+    </mat-card-title>
+    <mat-card-content class="grid-container">
+      <form
+        class="normal-form"
+        [formGroup]="customerForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="form-attr">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" />
+          </mat-form-field>
+        </div>
+        <div class="form-attr">
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" />
+          </mat-form-field>
+        </div>
+        <div class="form-attr">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+        </div>
+        <div class="form-attr">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone No</mat-label>
+            <input matInput formControlName="phoneNumber" />
+          </mat-form-field>
+        </div>
+        <div class="form-attr">
+          <mat-form-field appearance="outline">
+            <mat-label>ITIN / SSN</mat-label>
+            <input matInput formControlName="itinOrSsn" />
+          </mat-form-field>
+        </div>
+        <mat-form-field>
+          <mat-label>Date of birth</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateOfBirth"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <section class="button-section">
+          <div class="button-row">
+            <button mat-raised-button color="primary" type="submit">
+              Submit
+            </button>
+          </div>
+        </section>
+      </form>
+      <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+    </mat-card-content>
+  </mat-card>
+</div>

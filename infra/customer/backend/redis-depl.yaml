@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: redis-customer-db
+  name: redis-customer-db
+  namespace: banking
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: customer-redis
+  template:
+    metadata:
+      labels:
+        app: customer-redis
+    spec:
+      containers:
+      - name: customer-redis-cache
+        image: redis:latest
+        ports:
+        - containerPort: 6379
+        resources:
+          limits:
+            cpu: 0.3
+            memory: 250Mi

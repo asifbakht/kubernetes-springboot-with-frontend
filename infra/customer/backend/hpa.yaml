@@ -1,0 +1,53 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: customer-depl-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: customer-backend-app
+  minReplicas: 2
+  maxReplicas: 10
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 300
+      # - type: Percent # total percentage of pods that is scaled up will go down 
+      #   value: 25 # 25% of pods will scale down e.g total replica is 10 then it wil bring down 2.5 (3 pods at a time)
+      #   periodSeconds: 60 # 1 minute
+      selectPolicy: Min
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: AverageValue
+        averageValue: 400Mi
+  # - type: Pods
+  #   pods:
+  #     metric:
+  #       name: packets-per-second
+  #     target:
+  #       type: AverageValue
+  #       averageValue: 1k
+  # - type: Object
+  #   object:
+  #     metric:
+  #       name: requests-per-second
+  #     describedObject:
+  #       apiVersion: networking.k8s.io/v1
+  #       kind: Ingress
+  #       name: main-route
+  #     target:
+  #       type: Value
+  #       value: 10k

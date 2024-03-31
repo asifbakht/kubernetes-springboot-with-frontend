@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mysql-customer-db
+  name: mysql-customer-db
+  namespace: banking
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: customer-mysql
+  template:
+    metadata:
+      labels:
+        app: customer-mysql
+    spec:
+      containers:
+      - name: customer-mysql
+        image: mysql:latest
+        ports:
+        - containerPort: 3306
+        resources:
+          limits:
+            cpu: 0.5
+            memory: 512Mi
+        env:
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: customer-secret
+              key: mysqlDbUserName
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: customer-secret
+              key: mysqlDbPassword
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: customer-secret
+              key: mysqlDbRootPassword
+        - name: MYSQL_DATABASE 
+          valueFrom:
+            configMapKeyRef:
+              name: customer-configmap
+              key: mysqlDbName

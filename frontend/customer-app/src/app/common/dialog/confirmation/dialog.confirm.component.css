@@ -1,0 +1,15 @@
+button {
+  margin-right: 8px;
+}
+
+.button-props {
+  float: right;
+}
+
+.button-container {
+  display: flex;
+}
+
+.button {
+  margin-left: 10px; /* Add margin between buttons if needed */
+}

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: customer-frontend-angular
+  name: customer-frontend-angular
+  namespace: banking
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 25
+  selector:
+    matchLabels:
+      app: customer-app
+  template:
+    metadata:
+      labels:
+        app: customer-app
+    spec:
+      containers:
+      - name: customer-app
+        image: asifbakht/customer-frontend-angular:latest
+        resources:
+          limits:
+            cpu: 0.3
+            memory: 250Mi
+        ports:
+        - containerPort: 80 # nginx runs on 80 port so expose 80 port for container
+        # readinessProbe:
+        #   httpGet:
+        #     path: /actuator/health
+        #     port: 80
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 10
+        #   failureThreshold: 3
+      automountServiceAccountToken: false
+---
+# this is to give you idea how loadbalancer and service is created between 2 different service
+# but frontend will always be exposed through ingress 
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: payment-frontend-service
+#   namespace: banking
+# spec:
+#   selector:
+#     app: payment-deployment # name of deployment 
+#   type: LoadBalancer
+#   ports:
+#   - protocol: TCP
+#     port: 12345 # just random ip address to understand how service with different port works 
+#     targetPort: 80 # nginx port, so if 12345 port is accessed then it will be redirected to nginx 80 port
+#     nodePort: 30000 # external port that node will expose to access (this can be frontend port or backend port)

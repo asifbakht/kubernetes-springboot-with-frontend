@@ -1,0 +1,106 @@
+<div class="sub-content">
+  <div class="form-title">
+    <span class="form-title-text">CUSTOMERS</span>
+    <button
+      mat-icon-button
+      matTooltip="Add new customer"
+      class="back-button"
+      routerLink="/update-customer"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+  <section class="row">
+    <mat-paginator
+      [length]="pageData?.totalRecords"
+      [pageSize]="defaultSize"
+      [showFirstLastButtons]="true"
+      (page)="pageChanged($event)"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+    <mat-table
+      matSort
+      matSortDisableClear
+      matSortActive="activeSort"
+      (matSortChange)="sortData($event)"
+      [dataSource]="dataSourceCustomer"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="name">
+          NAME
+        </mat-header-cell>
+        <mat-cell *matCellDef="let eachItem">
+          {{ eachItem.firstName }} {{ eachItem.lastName }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="email">
+          EMAIL
+        </mat-header-cell>
+        <mat-cell *matCellDef="let eachItem">
+          {{ eachItem.email }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dateOfBirth">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="dateOfBirth">
+          DOB
+        </mat-header-cell>
+        <mat-cell *matCellDef="let eachItem">
+          {{ eachItem.dateOfBirth | date : "MM/dd/YYYY" }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="phoneNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="phoneNumber">
+          CONTACT NO
+        </mat-header-cell>
+        <mat-cell *matCellDef="let eachItem">
+          {{ eachItem.phoneNumber }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itinOrSsn">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="itinOrSsn">
+          ITIN/SSN
+        </mat-header-cell>
+        <mat-cell *matCellDef="let eachItem">
+          {{ eachItem.itinOrSsn }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef> ACTIONS </mat-header-cell>
+        <mat-cell *matCellDef="let eachItem">
+          <button
+            routerLink="/update-customer"
+            mat-icon-button
+            color="primary"
+            [state]="{ action: 'update', data: eachItem }"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            name="deleteButton"
+            mat-icon-button
+            color="warn"
+            (click)="deleteCustomer(eachItem)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="payments">
+        <mat-header-cell *matHeaderCellDef> PAYMENT METHOD </mat-header-cell>
+        <mat-cell *matCellDef="let eachItem">
+          <button routerLink="update-customer" mat-icon-button color="primary">
+            <mat-icon>payments</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnNames"></mat-row>
+      <div *matNoDataRow>No data</div>
+    </mat-table>
+  </section>
+</div>
