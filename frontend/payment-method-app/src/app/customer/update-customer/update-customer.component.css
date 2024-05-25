@@ -1,0 +1,68 @@
+.center-half {
+  padding-left: 35%;
+  padding-right: 35%;
+  margin-top: 20px;
+}
+
+.form-attr {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.normal-form {
+  padding: 20px;
+}
+
+.controles-container {
+  width: 100%;
+  padding: 5%;
+}
+
+.controles-container > * {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.form-title {
+  padding: 10px;
+  background-color: brown;
+  color: white;
+  font-weight: 400;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.form-title-text {
+  flex: 1;
+  text-align: center;
+}
+
+.button-section {
+  display: table;
+  float: right;
+}
+
+.button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 150px;
+}

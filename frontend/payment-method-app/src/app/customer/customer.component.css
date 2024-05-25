@@ -1,0 +1,49 @@
+.mat-column-name {
+  flex: 0 0 15%;
+}
+
+.mat-column-email {
+  flex: 0 0 20%;
+}
+
+.mat-column-dateOfBirth {
+  flex: 0 0 10%;
+}
+
+.mat-column-edit {
+  flex: 0 0 15%;
+}
+
+.mat-column-payments {
+  flex: 0 0 15%;
+}
+.mat-column-itinOrSsn {
+  flex: 0 0 10%;
+}
+.mat-column-phoneNumber {
+  flex: 0 0 15%;
+}
+
+.sub-content {
+  padding: 25px;
+}
+
+.form-title {
+  padding: 10px;
+  background-color: brown;
+  color: white;
+  font-weight: 800;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.form-title-text {
+  flex: 1;
+  text-align: center;
+}

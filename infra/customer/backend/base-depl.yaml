@@ -24,6 +24,9 @@ spec:
           limits:
             cpu: 0.5
             memory: 512Mi
+          request:
+            cpu: 0.3
+            memory: 256Mi
         ports:
         - containerPort: 9997
         env:

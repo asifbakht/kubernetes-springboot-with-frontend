@@ -1,0 +1,35 @@
+section {
+  display: table;
+}
+
+.content {
+  padding: 10px;
+}
+
+.root-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.root-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.root-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.root-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.root-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
